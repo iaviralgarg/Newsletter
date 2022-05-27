@@ -1,0 +1,35 @@
+{% extends 'partials/base.html' %}
+{% block title %}Home Page {% endblock %}
+
+{% load crispy_forms_tags %}
+<!--crispy forms template tag-->
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5 pt-5">
+        <div class="col-md-4 offset-md-4">
+
+            {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            <!--this template tag helps in showing the subscription successfully on the newsletter Page. We are passing the falsh message of that subs success here-->
+            </div>
+            {% endfor %}
+            
+            <div class="card">
+                <div class="card-body">
+                    <h3>Subscribe to Newsletter</h3>
+                    <hr>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input class="btn btn-info btn-block" type="submit" value="Subscribe">
+                    </form>
+                    <!-- This form creates an input which takes emails as input and submits it as value to suscribers. Csrf token is used for taking it securely.-->
+                    <h7> Created by: Aviral Garg <h7>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
